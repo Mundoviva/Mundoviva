@@ -34,50 +34,36 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Contact form submission - WhatsApp integration
+/* ---------------------------------
+   Contact form submission (Web3Forms)
+---------------------------------- */
 const contactForm = document.querySelector(".contact-form");
+
 if (contactForm) {
-  contactForm.addEventListener("submit", (e) => {
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Get form values
-    const inputs = contactForm.querySelectorAll("input");
-    const name = inputs[0].value.trim();
-    const email = inputs[1].value.trim();
-    const subject = inputs[2].value.trim();
-    const message = contactForm.querySelector("textarea").value.trim();
+    const formData = new FormData(contactForm);
 
-    // Validate that all fields are filled
-    if (!name || !email || !subject || !message) {
-      alert("Please fill in all fields before sending.");
-      return;
+    try {
+      const response = await fetch(contactForm.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        alert("Thank you! Your message has been sent successfully.");
+        contactForm.reset();
+      } else {
+        alert("Something went wrong. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("Network error. Please check your connection.");
     }
-
-    // WhatsApp phone number (remove spaces, +, and special characters)
-    const whatsappNumber = "15598534142"; // +1 (559) 853-4142
-
-    // Format the message for WhatsApp
-    const whatsappMessage = `Hello! I'm contacting you through your website.
-
-*Name:* ${name}
-*Email:* ${email}
-*Subject:* ${subject}
-
-*Message:*
-${message}`;
-
-    // Encode the message for URL
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-
-    // Create WhatsApp URL
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-    // Open WhatsApp in a new tab/window
-    window.open(whatsappURL, "_blank");
-
-    // Show confirmation and reset form
-    alert("Opening WhatsApp with your message...");
-    contactForm.reset();
   });
 }
 

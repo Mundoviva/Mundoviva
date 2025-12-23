@@ -248,33 +248,41 @@
               </div>
             </div>
           </div>
-          <form
-          class="contact-form"
-          name="contact"
-          method="POST"
-          data-netlify="true"
-        >
-          <input type="hidden" name="form-name" value="contact" />
+        <form
+        class="contact-form"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+      >
+        <input
+          type="hidden"
+          name="access_key"
+          value="c1111c66-dadc-4b7d-9318-bda78843a5bc"
+        />
 
-          <div class="form-group">
-            <input type="text" name="name" placeholder="Your Name" required />
-          </div>
+        <!-- Optional: where to go after submit (change to your domain) -->
+        <!-- <input type="hidden" name="redirect" value="https://YOURDOMAIN.com/#contact" /> -->
 
-          <div class="form-group">
-            <input type="email" name="email" placeholder="Your Email" required />
-          </div>
+        <!-- Optional: spam protection (honeypot) -->
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none;" />
 
-          <div class="form-group">
-            <input type="text" name="subject" placeholder="Subject" required />
-          </div>
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required />
+        </div>
 
-          <div class="form-group">
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-          </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required />
+        </div>
 
-          <button type="submit" class="submit-button">Send Message</button>
-        </form>
+        <div class="form-group">
+          <input type="text" name="subject" placeholder="Subject" required />
+        </div>
 
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-button">Send Message</button>
+      </form>
         </div>
       </div>
     </section>
